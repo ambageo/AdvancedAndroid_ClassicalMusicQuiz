@@ -77,6 +77,8 @@ class Sample {
      * @return The sample object.
      */
     static Sample getSampleByID(Context context, int sampleID) {
+        // JsonReader is used to read the contents of a JSON file. Implementation in readJSONFile
+        // method
         JsonReader reader;
         try {
             reader = readJSONFile(context);
