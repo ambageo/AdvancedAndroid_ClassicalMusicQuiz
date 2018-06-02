@@ -31,7 +31,8 @@ import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.media.app.NotificationCompat.MediaStyle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -195,10 +196,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         int icon;
         String play_pause;
         // Check the Playback state to decide which icon and title will be showed in the notification
-        if (state.getState() == PlaybackStateCompat.ACTION_PLAY) {
+        if (state.getState() == PlaybackStateCompat.STATE_PLAYING) {
             icon = R.drawable.exo_controls_play;
             play_pause = getString(R.string.play);
-        } else if (state.getState() == PlaybackStateCompat.ACTION_PAUSE) {
+        } else {
             icon = R.drawable.exo_controls_pause;
             play_pause = getString(R.string.pause);
         }
@@ -223,7 +224,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .addAction(playPauseAction)
                 .addAction(restartAction)
-                .setStyle(new NotificationCompat.MediaStyle()
+                .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle()
                         .setMediaSession(mMediaSession.getSessionToken())
                         .setShowActionsInCompactView(0, 1));
 
@@ -392,7 +393,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
         mMediaSession.setPlaybackState(mStateBuilder.build());
 
-        // TODO (2): Call the method to show the notification, passing in the PlayBackStateCompat object.
+        // COMPLETED (2): Call the method to show the notification, passing in the PlayBackStateCompat object.
         showNotification(mStateBuilder.build());
     }
 
